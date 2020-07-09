@@ -3,16 +3,16 @@ echo 'Running Asterisk / FreePBX Install'
 START_TIME=$SECONDS
 
 ###
-echo 'Checking SELINUX'
-	if sestatus | grep 'SELinux status' | grep enabled ; then
-		echo -e '\tSELinux is enabled... disabling!'
-		  sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/selinux/config 
-		  sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/sysconfig/selinux
-		  echo -e '\t\tSELinux was disabled, you must reboot and rerun script!'
-		  exit 0
-	else
-		echo -e '\tSELinux is disabled, proceeding with install.'
-	fi
+#echo 'Checking SELINUX'
+#	if sestatus | grep 'SELinux status' | grep enabled ; then
+#		echo -e '\tSELinux is enabled... disabling!'
+#		  sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/selinux/config 
+#		  sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/sysconfig/selinux
+#		  echo -e '\t\tSELinux was disabled, you must reboot and rerun script!'
+#		  exit 0
+#	else
+#		echo -e '\tSELinux is disabled, proceeding with install.'
+#	fi
 
 ###
 echo 'Running Updates'
