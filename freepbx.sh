@@ -85,30 +85,30 @@ echo -e '\tPear reqs installed.'
 ###
 echo 'Downloading Jansson and Asterisk'
 cd /usr/src 
-wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15-current.tar.gz
-wget -O jansson.tar.gz https://github.com/akheron/jansson/archive/v2.10.tar.gz
+wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-16-current.tar.gz
+#wget -O jansson.tar.gz https://github.com/akheron/jansson/archive/v2.10.tar.gz
 echo -e '\tDownload complete.'
 
 ###
-echo 'Compiling and Installing Jansson'
-cd /usr/src
-tar vxfz jansson.tar.gz
-rm -f jansson.tar.gz
-cd jansson-*
-autoreconf -i
-./configure --libdir=/usr/lib64
-make
-make install
-echo -e '\tJansson install complete.'
+#echo 'Compiling and Installing Jansson'
+#cd /usr/src
+#tar vxfz jansson.tar.gz
+#rm -f jansson.tar.gz
+#cd jansson-*
+#autoreconf -i
+#./configure --libdir=/usr/lib64
+#make
+#make install
+#echo -e '\tJansson install complete.'
 
 ###
 echo 'Compiling and Installing Asterisk, this will take a while'
 cd /usr/src
-tar xvfz asterisk-15-current.tar.gz
-rm -f asterisk-15-current.tar.gz
+tar xvfz asterisk-16-*
+#rm -f asterisk-16-current.tar.gz
 cd asterisk-*
 contrib/scripts/install_prereq install
-./configure --with-pjproject-bundled
+./configure --with-pjproject-bundled --with-jansson-bundled
 make menuselect
 make
 make install
@@ -127,7 +127,7 @@ echo -e '\tAsterisk permissions set.'
 
 ###
 echo 'Updating Apache Config'
-sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php.ini
+sed -i 's/\(^upload_max_filesize = \).*/\220M/' /etc/php.ini
 sed -i 's/^\(User\|Group\).*/\1 asterisk/' /etc/httpd/conf/httpd.conf
 sed -i 's/AllowOverride None/AllowOverride All/' /etc/httpd/conf/httpd.conf
 systemctl restart httpd.service
